@@ -149,5 +149,59 @@ dots.forEach((dot, index) => {
 // Windows resize update
 window.addEventListener('resize', () => showSlide(currentIdx));
 
+// Contact Form Handling (AJAX)
+const contactForm = document.getElementById('contact-form');
+const formSuccess = document.getElementById('form-success');
+
+if (contactForm && formSuccess) {
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const btn = contactForm.querySelector('.btn-send');
+        const originalBtnText = btn.innerHTML;
+        
+        // Show loading state
+        btn.innerHTML = currentLang === 'vi' ? 'Đang gửi...' : 'Sending...';
+        btn.disabled = true;
+        btn.style.opacity = '0.7';
+
+        const formData = new FormData(this);
+
+        fetch(this.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                // Success: Hide form, show success message
+                contactForm.style.display = 'none';
+                formSuccess.style.display = 'flex';
+                contactForm.reset();
+            } else {
+                alert(currentLang === 'vi' ? 'Có lỗi xảy ra. Hãy thử lại sau.' : 'Something went wrong. Please try again.');
+            }
+        })
+        .catch(error => {
+            alert(currentLang === 'vi' ? 'Lỗi kết nối. Hãy kiểm tra mạng của bạn.' : 'Connection error. Please check your network.');
+        })
+        .finally(() => {
+            // Restore button
+            btn.innerHTML = originalBtnText;
+            btn.disabled = false;
+            btn.style.opacity = '1';
+        });
+    });
+}
+
+function resetForm() {
+    if (contactForm && formSuccess) {
+        formSuccess.style.display = 'none';
+        contactForm.style.display = 'block';
+    }
+}
+
 // Initialize
 showSlide(0);

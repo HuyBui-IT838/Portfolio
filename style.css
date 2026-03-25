@@ -1066,6 +1066,71 @@ h3.section-title {
     box-shadow: 0 10px 30px rgba(100, 210, 255, 0.3);
 }
 
+/* --- Form Success Message Styles --- */
+.form-status-msg {
+    background: #0d1621;
+    border: 1px solid var(--accent-color);
+    padding: 4rem 2rem;
+    border-radius: 30px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    height: 100%;
+    justify-content: center;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.success-icon-circle {
+    width: 80px;
+    height: 80px;
+    background: rgba(56, 189, 248, 0.1);
+    color: var(--accent-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    box-shadow: 0 0 30px var(--accent-glow);
+    animation: scaleIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.form-status-msg h3 {
+    font-size: 2rem;
+    font-weight: 800;
+}
+
+.form-status-msg p {
+    color: var(--text-secondary);
+    max-width: 350px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.btn-retry {
+    margin-top: 1rem;
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    color: var(--text-secondary);
+    padding: 0.8rem 2rem;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-retry:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    border-color: var(--text-primary);
+}
+
+@keyframes scaleIn {
+    from { transform: scale(0); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
 @media (max-width: 1200px) {
     .contact-grid {
         grid-template-columns: 1fr;
